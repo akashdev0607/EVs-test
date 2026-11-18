@@ -1,0 +1,626 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVS Class 11 Master Exam Prep - Unit 1 (First 4 Chapters)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(34, 197, 94, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(34, 197, 94, 0.6); }
+        }
+        .glow-box {
+            animation: pulseGlow 3s infinite;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #22c55e;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased min-h-screen selection:bg-brand-500 selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-brand-500/30 text-white text-xl font-bold">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-emerald-200 to-brand-400 bg-clip-text text-transparent">EVS Crash Course</h1>
+                    <p class="text-xs text-slate-400 font-medium">AHSEC Class 11 • Unit 1 (Chapters 1-4)</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center bg-slate-800/90 rounded-full p-1.5 border border-slate-700/60 shadow-inner">
+                    <button onclick="switchTab(1)" id="nav-btn-1" class="px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 bg-brand-600 text-white shadow-md">Ch 1: Environment</button>
+                    <button onclick="switchTab(2)" id="nav-btn-2" class="px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 text-slate-300 hover:text-white">Ch 2: Ecology</button>
+                    <button onclick="switchTab(3)" id="nav-btn-3" class="px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 text-slate-300 hover:text-white">Ch 3: Biodiversity</button>
+                    <button onclick="switchTab(4)" id="nav-btn-4" class="px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 text-slate-300 hover:text-white">Ch 4: Resources</button>
+                </div>
+
+                <button onclick="openExamTimerModal()" class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold px-4 py-2.5 rounded-xl shadow-lg shadow-green-900/30 transition transform active:scale-95 flex items-center space-x-2 text-sm">
+                    <i class="fa-solid fa-stopwatch-20"></i>
+                    <span>Exam Countdown</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Bar -->
+    <div class="md:hidden bg-slate-800 border-b border-slate-700 px-4 py-2 flex overflow-x-auto space-x-2 scrollbar-none">
+        <button onclick="switchTab(1)" id="mob-btn-1" class="whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-600 text-white">Ch 1</button>
+        <button onclick="switchTab(2)" id="mob-btn-2" class="whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-700 text-slate-300">Ch 2</button>
+        <button onclick="switchTab(3)" id="mob-btn-3" class="whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-700 text-slate-300">Ch 3</button>
+        <button onclick="switchTab(4)" id="mob-btn-4" class="whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-700 text-slate-300">Ch 4</button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Banner for Exam Eve -->
+        <section class="mb-10 bg-gradient-to-r from-slate-800 via-slate-800/90 to-slate-900 border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-3 text-center md:text-left">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-400 border border-brand-500/30">
+                        <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Exam Prep Emergency Mode
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">Ace Your 50-Marks EVS Exam Tomorrow!</h2>
+                    <p class="text-slate-300 text-sm sm:text-base max-w-2xl">
+                        Designed strictly according to the Assam Higher Secondary Education Council (AHSEC) syllabus. Every topic is structured into <span class="text-brand-400 font-semibold">Explanation</span>, <span class="text-brand-400 font-semibold">Exam-Ready Answer</span>, and <span class="text-brand-400 font-semibold">Real-Life Analogy</span>, followed by 20 high-yield MCQs per chapter.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="scrollToMCQs()" class="bg-slate-700 hover:bg-slate-600 text-white font-semibold px-5 py-3 rounded-xl border border-slate-600 transition flex items-center justify-center space-x-2 text-sm shadow-md">
+                        <i class="fa-solid fa-bolt text-amber-400"></i>
+                        <span>Jump to Chapter MCQs</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter Content Container -->
+        <div id="chapter-content-container">
+            <!-- Dynamic Chapter Injection Point -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-8 mt-20 text-center text-slate-500 text-xs">
+        <p>AHSEC Class 11 Environmental Studies Prep Portal • Built for Exam Success</p>
+        <p class="mt-1">Format: Explanation → Exam-Ready Answer → Real-Life Analogy + 20 MCQs per chapter.</p>
+    </footer>
+
+    <!-- Exam Timer Modal -->
+    <div id="timerModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-slate-800 border border-slate-700 rounded-3xl p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl relative text-center">
+            <button onclick="closeExamTimerModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <div class="w-16 h-16 bg-brand-500/20 text-brand-400 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl glow-box">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Exam Countdown & Revision Timer</h3>
+            <p class="text-slate-400 text-xs mb-6">Stay focused. Break your revision into 45-minute sprint sessions with 10-minute breaks!</p>
+            
+            <div class="bg-slate-900 rounded-2xl p-4 border border-slate-700 mb-6">
+                <div id="countdown-timer" class="text-4xl font-extrabold text-emerald-400 font-mono tracking-wider">45:00</div>
+                <p class="text-xs text-slate-500 mt-1">Pomodoro Focus Timer</p>
+            </div>
+
+            <div class="flex justify-center space-x-3">
+                <button onclick="startTimer()" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition">Start Sprint</button>
+                <button onclick="resetTimer()" class="bg-slate-700 hover:bg-slate-600 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Data & Application Logic -->
+    <script>
+        // Database for Chapters with AHSEC Unit 1 (Chapters 1 to 4)
+        const evsData = {
+            1: {
+                title: "Chapter 1: Basic Concept of Environment",
+                subtitle: "Comprising definition, components (biotic, abiotic, energy), segments (atmosphere, hydrosphere, lithosphere, biosphere), and multidisciplinary nature.",
+                topics: [
+                    {
+                        title: "1. Definition & Etymology of Environment",
+                        explanation: "The term 'environment' comes from the French word 'environner', which means 'to encircle' or 'to surround'. It represents the sum total of all social, economic, biological, physical, and chemical factors that constitute the surroundings of living organisms. Man is both the creator and moulder of his environment.",
+                        examAnswer: "Environment is defined as the circumstances or conditions surrounding an organism or group of organisms, comprising interacting biotic (living) and abiotic (non-living) components that create favorable conditions for existence and evolution.",
+                        analogy: "Think of environment like the operating system and physical casing of a smartphone. The apps (biotic life) run on top of the hardware and software background (abiotic surroundings), and if the system crashes or heats up, all apps suffer."
+                    },
+                    {
+                        title: "2. Components of Environment",
+                        explanation: "Environment is broadly divided into three main components: (a) Abiotic (non-living) components subdivided into Lithosphere (solid), Hydrosphere (liquid), and Atmosphere (gas). (b) Biotic (living) components including flora and fauna including human beings. (c) Energy components including solar, geothermal, hydroelectric, and atomic energy.",
+                        examAnswer: "The three core components of environment are: 1. Abiotic components (Lithosphere, Hydrosphere, Atmosphere), 2. Biotic components (Flora, Fauna, Humans), and 3. Energy components (Solar, Hydroelectric, Geothermal energy).",
+                        analogy: "Imagine an aquarium: water and rocks are abiotic, fish and plants are biotic, and the sunlight or aquarium heater providing warmth represents the energy component."
+                    },
+                    {
+                        title: "3. Four Segments of Environment",
+                        explanation: "The Earth's environment functions across four major segments: Atmosphere (gaseous blanket surrounding earth), Hydrosphere (all water bodies covering 71% of Earth, 97% saline, 3% fresh), Lithosphere (solid outer mantle of soil and minerals), and Biosphere (the zone where life exists, spanning 6-8 km into atmosphere and 8-10 km into oceans).",
+                        examAnswer: "The four segments are: Atmosphere (protective gas layer blocking harmful UV rays and maintaining heat balance), Hydrosphere (water reserves holding 71% surface area), Lithosphere (solid crust/soil storing minerals), and Biosphere (narrow zone sustaining all living organisms).",
+                        analogy: "Like a well-equipped spaceship: Atmosphere is the air supply and shielding, Hydrosphere is the water tank, Lithosphere is the metal hull and soil deck, and Biosphere is the crew cabin where living beings actually thrive."
+                    },
+                    {
+                        title: "4. Environmental Education & Tbilisi Guidelines",
+                        explanation: "Environmental education is an educational process dealing with man's relationship with natural and man-made surroundings. It fosters awareness, knowledge, attitude, skills, and participation. The First Intergovernmental Conference on EE at Tbilisi (USSR, 1977) established core guidelines emphasizing interdisciplinary approaches, holistic perspectives, and critical evaluation of local to global issues.",
+                        examAnswer: "Environmental Education is education through environment, about environment, and for the environment. Key Tbilisi Conference (1977) guidelines state it must be interdisciplinary, continuous from preschool onwards, holistic, and focused on solving local/global environmental challenges.",
+                        analogy: "Like learning traffic rules before driving: you don't just memorize signs; you understand how your driving affects others, why accidents happen, and how to stay safe together."
+                    },
+                    {
+                        title: "5. Multidisciplinary Nature & Need for Awareness",
+                        explanation: "Environmental education is multidisciplinary because understanding complex environmental phenomena requires botany, zoology, physics, chemistry, mathematics, computer science, engineering, sociology, and economics. Public awareness is vital because no government law can succeed without active citizen cooperation to halt resource degradation.",
+                        examAnswer: "Environment is multidisciplinary as it integrates sciences (biology, chemistry, physics) for biotic/abiotic study, engineering for pollution control, and social sciences for policy/ethics. Awareness is essential because individual attitudes and cooperative efforts prevent ecological collapse.",
+                        analogy: "Like baking a gourmet cake: you need flour (biology), sugar (chemistry), precise oven temperature (physics), timing (math), and economics (cost of ingredients). No single ingredient makes the cake."
+                    }
+                ],
+                mcqs: [
+                    { q: "The term 'environment' is derived from which French word?", options: ["Environner", "Environ", "Envire", "Environon"], ans: 0 },
+                    { q: "What percentage of the Earth's surface is covered by water?", options: ["50%", "61%", "71%", "85%"], ans: 2 },
+                    { q: "What percentage of Earth's water is fresh water?", options: ["97%", "3%", "10%", "1%"], ans: 1 },
+                    { q: "The Intergovernmental Conference on Environmental Education was held in Tbilisi in which year?", options: ["1972", "1977", "1987", "1992"], ans: 1 },
+                    { q: "Which gas has the highest percentage in the atmosphere?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"], ans: 2 },
+                    { q: "The ozone layer is located in which layer of the atmosphere?", options: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], ans: 1 },
+                    { q: "Biosphere extends into the ocean depth up to:", options: ["1-2 km", "3-5 km", "8-10 km", "20 km"], ans: 2 },
+                    { q: "Which conference on human environment took place in 1972?", options: ["Rio Conference", "Stockholm Conference", "Tbilisi Conference", "Montreal Protocol"], ans: 1 },
+                    { q: "Which of the following is an abiotic component?", options: ["Plants", "Animals", "Lithosphere", "Decomposers"], ans: 2 },
+                    { q: "Edaphic factors are related to:", options: ["Water", "Soil", "Air", "Temperature"], ans: 1 },
+                    { q: "Which of the following is a minor component of the atmosphere?", options: ["Nitrogen", "Oxygen", "Argon", "Hydrogen"], ans: 2 },
+                    { q: "Environmental education is best described as:", options: ["A separate pure science", "An interdisciplinary dimension in education", "Only study of forests", "Branch of geology"], ans: 1 },
+                    { q: "The solid outer mantle of the earth consisting of soil and minerals is called:", options: ["Hydrosphere", "Lithosphere", "Atmosphere", "Biosphere"], ans: 1 },
+                    { q: "Ultraviolet radiations are filtered out primarily by:", options: ["Carbon dioxide", "Ozone layer", "Nitrogen gas", "Water vapour"], ans: 1 },
+                    { q: "Green chemistry is specifically concerned with:", options: ["Planting trees", "Protecting degraded environment through safe chemical design", "Forest conservation", "Water harvesting"], ans: 1 },
+                    { q: "Stockholm conference emphasized the need for:", options: ["Space exploration", "Environmentally oriented education", "Industrial growth", "Mining regulation"], ans: 1 },
+                    { q: "Which gas is essential for plant photosynthesis?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Helium"], ans: 2 },
+                    { q: "The percentage of Oxygen in the atmosphere is approximately:", options: ["78.09%", "20.94%", "0.03%", "1.00%"], ans: 1 },
+                    { q: "Which of the following is NOT an objective of environmental education?", options: ["Awareness", "Knowledge", "Political dominance", "Participation"], ans: 2 },
+                    { q: "The study of interactions between organisms and their surroundings is the core of:", options: ["Geology", "Ecology", "Economics", "Astronomy"], ans: 1 }
+                ]
+            },
+            2: {
+                title: "Chapter 2: Ecological Concept",
+                subtitle: "Covering ecology, ecosystem structure and function, food chain, food web, trophic levels, and ecological pyramids.",
+                topics: [
+                    {
+                        title: "1. Meaning of Ecology and Ecosystem",
+                        explanation: "'Ecology' is derived from Greek words 'oikos' (home) and 'logos' (study), meaning the study of organisms in their natural homes. An ecosystem is the main functional active unit of ecology comprising biological communities interacting dynamically with non-living physical environments.",
+                        examAnswer: "Ecology is the study of interconnections and interdependence between plants, animals, and their environment. An ecosystem is a functional community of living organisms interacting with each other and with their physical non-living environment.",
+                        analogy: "Think of an ecosystem like a bustling kitchen restaurant: chefs (producers), waiters (consumers), and sanitation staff (decomposers) working together with kitchen appliances and ingredients (abiotic factors) to keep the business running smoothly."
+                    },
+                    {
+                        title: "2. Types of Ecosystems",
+                        explanation: "Ecosystems are classified into Natural ecosystems (Terrestrial like forests, grasslands, deserts; and Aquatic like freshwater lotic/flowing and lentic/standing, or marine) and Artificial/Man-made ecosystems (croplands, aquariums, gardens requiring human intervention).",
+                        examAnswer: "Ecosystems are of two types: 1. Natural Ecosystems (Terrestrial: forest, grassland, desert; Aquatic: freshwater [lotic/rivers, lentic/ponds] and marine). 2. Artificial Ecosystems: Man-made and maintained systems like agricultural croplands and gardens.",
+                        analogy: "A natural forest is like a wild jungle where nature manages everything automatically; an artificial fish pond in a backyard is like an aquarium where you must manually feed fish, clean filters, and pump water."
+                    },
+                    {
+                        title: "3. Structure of Ecosystem (Biotic & Abiotic)",
+                        explanation: "Ecosystem structure consists of Biotic components (Autotrophs/Producers like green plants; Heterotrophs/Consumers like herbivores, carnivores, omnivores, detritivores; and Micro-consumers/Decomposers like bacteria and fungi) and Abiotic components (temperature, light, soil/edaphic factors, and inorganic nutrients).",
+                        examAnswer: "Ecosystem structure consists of: 1. Biotic Structure: Autotrophs (producers making food via photosynthesis), Macro-consumers (herbivores, carnivores, omnivores), and Micro-consumers (decomposers like bacteria/fungi). 2. Abiotic Structure: Physical factors (sunlight, temperature) and chemical nutrients (C, N, P, water).",
+                        analogy: "In a factory: Solar energy is electricity, machinery and building are abiotic factors, plants are raw material creators, herbivores are assembly workers, carnivores are quality controllers, and decomposers are recycling units cleaning up waste."
+                    },
+                    {
+                        title: "4. Food Chain, Food Web, and Trophic Levels",
+                        explanation: "A food chain is a linear sequential chain of eating and being eaten (unidirectional energy flow, e.g., Grass -> Deer -> Tiger). A food web is an intricate network of interconnected food chains. Trophic levels represent the feeding level of organisms (T1: Producers, T2: Herbivores, T3: Carnivores).",
+                        examAnswer: "Food chain is a unidirectional sequence of organisms transferring food energy (Grazing and Detritus types). Food web is an interlocking network of multiple food chains. Trophic level is the specific feeding position of organisms in an ecosystem.",
+                        analogy: "A food chain is like a single highway route from your house to school; a food web is like a complex city subway map with multiple interconnected routes to reach the same destination."
+                    },
+                    {
+                        title: "5. Ecological Pyramids",
+                        explanation: "Ecological pyramids are graphical representations of trophic structures with producers at the base and successive consumer levels at the apex. They are of three types: Pyramid of Numbers (count of individuals), Pyramid of Biomass (dry weight), and Pyramid of Energy (energy flow efficiency).",
+                        examAnswer: "Ecological pyramids are graphical representations of trophic levels showing producers at the base and apex consumers at the top. Three types are: 1. Pyramid of Numbers, 2. Pyramid of Biomass, and 3. Pyramid of Energy (always upright).",
+                        analogy: "Like a corporate organizational chart: base level has hundreds of ground staff (producers), middle has managers (consumers), and top has executive directors (top carnivores)."
+                    }
+                ],
+                mcqs: [
+                    { q: "The word 'ecology' is derived from Greek words 'oikos' meaning:", options: ["Study", "Home", "Science", "Nature"], ans: 1 },
+                    { q: "Who defined ecosystem as the main active unit of ecology in 1963?", options: ["Odum", "Darwin", "Haeckel", "Tansley"], ans: 0 },
+                    { q: "Lotic ecosystem refers to:", options: ["Standing water like ponds", "Free flowing water like rivers", "Desert ecosystems", "Forest ecosystems"], ans: 1 },
+                    { q: "Green plants in an ecosystem act as:", options: ["Primary consumers", "Secondary consumers", "Producers", "Decomposers"], ans: 2 },
+                    { q: "Organisms that feed on both plants and animals are called:", options: ["Herbivores", "Carnivores", "Omnivores", "Detritivores"], ans: 2 },
+                    { q: "Bacteria and fungi belong to which category in an ecosystem?", options: ["Producers", "Primary consumers", "Decomposers", "Top carnivores"], ans: 2 },
+                    { q: "Food chain is always:", options: ["Bidirectional", "Circular", "Unidirectional", "Multidimensional"], ans: 2 },
+                    { q: "An interlocking network of food chains is called:", options: ["Food web", "Trophic level", "Biomass pyramid", "Energy grid"], ans: 0 },
+                    { q: "The base of any ecological pyramid is occupied by:", options: ["Carnivores", "Herbivores", "Producers", "Decomposers"], ans: 2 },
+                    { q: "Which ecological pyramid is always upright?", options: ["Pyramid of numbers", "Pyramid of biomass", "Pyramid of energy", "All pyramids"], ans: 2 },
+                    { q: "Lentic ecosystems include:", options: ["Rivers", "Streams", "Ponds and lakes", "Oceans"], ans: 2 },
+                    { q: "Animals that directly consume producers are called:", options: ["Secondary consumers", "Herbivores", "Carnivores", "Top predators"], ans: 1 },
+                    { q: "Kaziranga National Park represents which type of ecosystem?", options: ["Artificial ecosystem", "Natural terrestrial/aquatic ecosystem", "Laboratory ecosystem", "Marine ecosystem"], ans: 1 },
+                    { q: "The feeding level of an organism in an ecosystem is known as:", options: ["Habitat", "Trophic level", "Niche", "Biome"], ans: 1 },
+                    { q: "Cropland ecosystem is an example of:", options: ["Natural ecosystem", "Artificial or man-made ecosystem", "Desert ecosystem", "Marine ecosystem"], ans: 1 },
+                    { q: "Organisms deriving nutrients from dead and decaying organic matter are:", options: ["Autotrophs", "Detritivores / Decomposers", "Producers", "Herbivores"], ans: 1 },
+                    { q: "The term 'ecosystem' was first coined by:", options: ["A.G. Tansley", "E.P. Odum", "Ernst Haeckel", "Charles Darwin"], ans: 0 },
+                    { q: "In a grazing food chain, the first trophic level consists of:", options: ["Herbivores", "Green plants", "Carnivores", "Microbes"], ans: 1 },
+                    { q: "Which of the following is a macro-consumer?", options: ["Bacteria", "Fungi", "Deer", "Algae"], ans: 2 },
+                    { q: "The dry weight of living matter at each trophic level is measured in:", options: ["Pyramid of numbers", "Pyramid of biomass", "Pyramid of energy", "Food web"], ans: 1 }
+                ]
+            },
+            3: {
+                title: "Chapter 3: Biodiversity and its Conservation",
+                subtitle: "Covering biodiversity levels (genetic, species, ecosystem), values, major threats, in-situ/ex-situ conservation, and Indian acts.",
+                topics: [
+                    {
+                        title: "1. The Term Biodiversity & Its Levels",
+                        explanation: "Biodiversity (biological diversity) refers to the number, variety, and variability of all life forms on Earth. It is described at three levels: Genetic diversity (variety of genes within species, e.g., Basmati vs. Joha rice), Species diversity (variety of distinct species), and Ecosystem diversity (variety of habitats and ecological communities).",
+                        examAnswer: "Biodiversity is the variability among living organisms across genetic, species, and ecosystem levels. 1. Genetic diversity: variety of genes within a species. 2. Species diversity: variety and abundance of species in a region. 3. Ecosystem diversity: variety of ecological habitats and processes.",
+                        analogy: "Think of biodiversity like a massive public library: Genetic diversity is different editions of the same book; Species diversity is the thousands of distinct book titles; Ecosystem diversity is the different sections and floors (fantasy, science, history)."
+                    },
+                    {
+                        title: "2. Values of Biodiversity",
+                        explanation: "Biodiversity provides immense value: Consumptive use (food from plants, traditional medicines like penicillin/quinine/aspirin), Productive use (commercial products like timber, silk, lac, paper), Social use (cultural/religious significance like Tulsi, sacred groves), Ethical use (moral right of every species to exist), and Aesthetic use (scenic beauty and recreation).",
+                        examAnswer: "Biodiversity values include: 1. Consumptive use (food, herbal medicines like quinine/penicillin), 2. Productive use (commercial items like silk, timber, lac), 3. Social & cultural use (sacred groves, holy plants/animals), 4. Ethical use (intrinsic right to life), 5. Aesthetic use (recreation and natural beauty).",
+                        analogy: "Like a multi-tool pocket knife: it provides food, medicine, building material, spiritual peace, and joy all at once."
+                    },
+                    {
+                        title: "3. Threats to Biodiversity",
+                        explanation: "Biodiversity faces severe anthropogenic and natural threats: Habitat destruction (deforestation, mega dams, Jhum cultivation), Overgrazing on grasslands, Poaching (illegal wildlife trade for rhino horns, elephant tusks, tiger fur), Natural calamities (floods, earthquakes), Climate change & global warming, and Biopiracy (unethical patenting of indigenous bioresources).",
+                        examAnswer: "Major threats to biodiversity are: 1. Habitat destruction (deforestation, urbanization), 2. Poaching (illegal smuggling of horns, tusks), 3. Overgrazing, 4. Natural calamities (floods, earthquakes), 5. Climate change & global warming, 6. Biopiracy (unauthorized patenting of traditional bio-wealth).",
+                        analogy: "Like demolition and looting of a grand ancient city: breaking down houses (habitat loss), hunting citizens (poaching), and stealing cultural treasures (biopiracy)."
+                    },
+                    {
+                        title: "4. Conservation of Biodiversity (In-Situ & Ex-Situ)",
+                        explanation: "Biodiversity conservation is protection and management of biological wealth. It is of two types: In-situ conservation (on-site preservation in natural habitats like National Parks, Wildlife Sanctuaries, Biosphere Reserves, e.g., Kaziranga, Manas) and Ex-situ conservation (off-site preservation in botanical gardens, zoos, gene banks, seed banks).",
+                        examAnswer: "Conservation is classified into: 1. In-situ Conservation: Preserving species in their natural habitats (e.g., National Parks like Kaziranga, Wildlife Sanctuaries, Biosphere Reserves like Manas). 2. Ex-situ Conservation: Preserving species away from natural habitats (e.g., botanical gardens, zoos, gene banks).",
+                        analogy: "In-situ is like protecting tigers by keeping them safely inside a guarded national forest; Ex-situ is like moving endangered plant seeds into a secure botanical seed bank or greenhouse."
+                    },
+                    {
+                        title: "5. National Conservation Strategies & Acts",
+                        explanation: "India has enacted robust legal frameworks for biodiversity conservation: Environment Protection Act (1986) for general environmental safety and hazardous substances; Forest (Conservation) Act (1980) regulating non-forest land use; and Wildlife (Protection) Act (1972) with 1991 amendments banning hunting, protecting plants/animals, and establishing zoos and sanctuaries.",
+                        examAnswer: "Key Indian conservation acts are: 1. Environment Protection Act, 1986 (general environmental safeguards), 2. Forest (Conservation) Act, 1980 (regulating forest diversion), 3. Wildlife (Protection) Act, 1972 & 1991 Amendment (prohibiting hunting and establishing sanctuaries/national parks).",
+                        analogy: "Like strict school rules and security guards: setting boundaries, penalizing rule-breakers, and protecting school property so everyone remains safe."
+                    }
+                ],
+                mcqs: [
+                    { q: "Basmati rice and Joha rice illustrate which type of biodiversity?", options: ["Species diversity", "Genetic diversity", "Ecosystem diversity", "Functional diversity"], ans: 1 },
+                    { q: "Quinine, used for treating malaria, is obtained from:", options: ["Cinchona tree bark", "Neem leaves", "Tulsi", "Fungus Penicillium"], ans: 0 },
+                    { q: "The unauthorized patenting of indigenous biological resources is known as:", options: ["Biopiracy", "Biofarming", "Bioremediation", "Bioprospecting"], ans: 0 },
+                    { q: "In-situ conservation means:", options: ["Off-site preservation in zoos", "On-site preservation in natural habitat", "Preservation in seed banks", "Laboratory cloning"], ans: 1 },
+                    { q: "Manas National Park in Assam is famous for protecting:", options: ["One-horned rhino only", "Golden langur and pygmy hog", "Snow leopard", "Lion"], ans: 1 },
+                    { q: "Wildlife (Protection) Act was enacted in India in:", options: ["1972", "1980", "1986", "2002"], ans: 0 },
+                    { q: "Forest (Conservation) Act was enacted in:", options: ["1972", "1980", "1986", "1992"], ans: 1 },
+                    { q: "Environment Protection Act was passed in India in:", options: ["1972", "1980", "1986", "1995"], ans: 2 },
+                    { q: "Which of the following is an example of ex-situ conservation?", options: ["National Park", "Wildlife Sanctuary", "Botanical Garden", "Biosphere Reserve"], ans: 2 },
+                    { q: "Pockets of forests traditionally set aside and protected by local communities are called:", options: ["Sacred groves", "Reserved timber plots", "Jhum lands", "Agro-forests"], ans: 0 },
+                    { q: "Antibiotic penicillin is derived from:", options: ["Bacterium", "Fungus Penicillium", "Algae", "Virus"], ans: 1 },
+                    { q: "Kaziranga National Park is primarily famous for:", options: ["Asiatic Elephant", "Asiatic Rhinoceros", "Tiger", "Lion"], ans: 1 },
+                    { q: "World Charter for Nature was adopted by the United Nations in:", options: ["1972", "1982", "1992", "2000"], ans: 1 },
+                    { q: "Which of the following is a direct threat to biodiversity?", options: ["Afforestation", "Habitat destruction", "Rainwater harvesting", "Eco-club formation"], ans: 1 },
+                    { q: "Number of National Parks in Assam is currently:", options: ["2", "5", "10", "22"], ans: 1 },
+                    { q: "Number of Wildlife Sanctuaries in Assam is approximately:", options: ["5", "10", "22", "50"], ans: 2 },
+                    { q: "The Earth Summit was held in Rio de Janeiro in:", options: ["1972", "1982", "1992", "2002"], ans: 2 },
+                    { q: "Which level of biodiversity considers the variety of habitats in a region?", options: ["Genetic diversity", "Species diversity", "Ecosystem diversity", "Population diversity"], ans: 2 },
+                    { q: "Poaching poses a major threat primarily to:", options: ["Grasses", "Large mammals like rhinos and elephants", "Microbes", "Mosses"], ans: 1 },
+                    { q: "National Bureau of Plant Genetic Resources is located in:", options: ["Karnal", "New Delhi", "Guwahati", "Mumbai"], ans: 1 }
+                ]
+            },
+            4: {
+                title: "Chapter 4: Natural Resources",
+                subtitle: "Covering renewable and non-renewable resources, forest resources, water resources in NE India, land degradation, and mineral wealth.",
+                topics: [
+                    {
+                        title: "1. Natural Resources & Classification",
+                        explanation: "Natural resources are valuable materials and services obtained directly from nature that sustain human welfare and development. They are classified into Renewable resources (inexhaustible or regenerable within given time spans like solar energy, forests, wildlife) and Non-renewable resources (available in finite quantities like coal, petroleum, minerals).",
+                        examAnswer: "Natural resources are gifts of nature essential for civilization. They are classified into: 1. Renewable resources (regenerable over time, e.g., solar energy, forests, water), and 2. Non-renewable resources (finite reserves that cannot be replenished once exhausted, e.g., coal, petroleum, minerals).",
+                        analogy: "Renewable resources are like money earned from a salary job that keeps refilling every month; non-renewable resources are like a fixed bank inheritance that depletes permanently every time you withdraw from it."
+                    },
+                    {
+                        title: "2. Forest Resources & Ecological Services",
+                        explanation: "Forests cover about 1/3rd of the world's land area. Beyond commercial goods (timber, fuel, paper pulp, medicines), forests provide vital ecological services: producing oxygen via photosynthesis, absorbing carbon dioxide to mitigate global warming, providing wildlife habitat, regulating the hydrological cycle, preventing soil erosion, and acting as pollution sinks.",
+                        examAnswer: "Forests provide timber, fuel, and medicines, and crucial ecological services: 1. Oxygen production & CO2 absorption (mitigating global warming), 2. Habitat for flora/fauna, 3. Soil erosion control, 4. Regulation of local climate and hydrological cycle, 5. Acting as natural pollution filters.",
+                        analogy: "Forests are like the life-support air conditioning and filtering system of a massive hospital building, keeping the air clean, cool, and regulated."
+                    },
+                    {
+                        title: "3. Water Resources in North-East India",
+                        explanation: "Water is indispensable. Earth has 97% saline water and only 3% fresh water (mostly locked in icecaps). NE India is exceptionally rich in freshwater potential with an annual surface water potential of 585.6 km³ (highest in India, 5th in the world) and heavy rainfall (e.g., Cherrapunjee). However, rapid runoff causes dry-season water shortages. Assam has the highest groundwater potential in NE.",
+                        examAnswer: "NE India possesses abundant water resources with 585.6 km³ annual surface water potential and high rainfall (Cherrapunjee). Key water bodies include Brahmaputra and Barak river basins, Loktak Lake in Manipur, and thousands of wetlands. Conservation requires rainwater harvesting, reducing runoff, and pollution control.",
+                        analogy: "Like living in a region with heavy seasonal monsoon storms: you have massive water during rains, but without storage tanks (wetlands/rainwater harvesting), you face drought during dry months."
+                    },
+                    {
+                        title: "4. Land Resources & Soil Degradation",
+                        explanation: "Land is a finite resource taking 200-1000 years to form 2.5 cm of topsoil. Soil degradation occurs due to Soil erosion (loss of topsoil), Waterlogging (excess underground water accumulation), Salinization (accumulation of soluble salts destroying fertility), and contamination by industrial heavy metals and pesticides.",
+                        examAnswer: "Land is a finite resource vital for agriculture. Causes of degradation include soil erosion, waterlogging, salinization, and chemical contamination by agrochemicals and industrial waste. Conservation requires afforestation, organic fertilizers, and proper waste disposal.",
+                        analogy: "Topsoil is like the thin icing on a cake: once washed away by heavy rain or ruined by toxic chemicals, you cannot easily restore the rich cake layer underneath."
+                    },
+                    {
+                        title: "5. Mineral Resources of NE India",
+                        explanation: "Minerals are naturally occurring inorganic crystalline solids. India is rich in ferrous metallic minerals (iron-ore, manganese), while NE India is a treasure house of mineral wealth: Meghalaya has uranium, coal, and limestone; Assam is renowned for crude petroleum, natural gas, coal, limestone, and sillimanite, managed largely by ONGC.",
+                        examAnswer: "Minerals are inorganic crystalline solids categorized as metallic, non-metallic, and energy-generating. NE India is rich in minerals: Meghalaya boasts coal, limestone, and uranium; Assam is rich in petroleum, natural gas, coal, and limestone, with ONGC playing a major exploratory role.",
+                        analogy: "Minerals are like buried treasure chests inside the earth's crust that provide the raw industrial fuel and metallic skeleton for modern machinery and energy grids."
+                    }
+                ],
+                mcqs: [
+                    { q: "Resources that can be regenerated within a given span of time are called:", options: ["Non-renewable resources", "Renewable resources", "Exhaustible minerals", "Synthetic resources"], ans: 1 },
+                    { q: "Approximately what fraction of the world's land area is covered by forests?", options: ["1/10th", "1/3rd", "1/2", "3/4th"], ans: 1 },
+                    { q: "What percentage of the earth's water is readily available fresh water for direct human use?", options: ["97%", "3%", "1%", "20%"], ans: 2 },
+                    { q: "Which North-Eastern state has the highest groundwater potential?", options: ["Meghalaya", "Manipur", "Assam", "Nagaland"], ans: 2 },
+                    { q: "Loktak Lake, one of the largest freshwater lakes in India, is located in:", options: ["Assam", "Manipur", "Meghalaya", "Sikkim"], ans: 1 },
+                    { q: "The time required for the formation of one inch (2.5 cm) of soil is approximately:", options: ["1-5 years", "10-50 years", "200-1000 years", "10,000 years"], ans: 2 },
+                    { q: "Accumulation of soluble salts in soil that severely affects fertility is called:", options: ["Waterlogging", "Salinization", "Eutrophication", "Leaching"], ans: 1 },
+                    { q: "Which public sector organization is prominent in petroleum exploration in Assam?", options: ["Coal India", "ONGC", "NTPC", "SAIL"], ans: 1 },
+                    { q: "Meghalaya is particularly famous for deposits of:", options: ["Uranium, coal, and limestone", "Gold and diamond", "Copper only", "Iron ore only"], ans: 0 },
+                    { q: "Which of the following is a non-renewable natural resource?", options: ["Solar energy", "Forest", "Coal and petroleum", "Wildlife"], ans: 2 },
+                    { q: "Annual surface water potential assessed in North-East India is approximately:", options: ["58.5 km³", "185.6 km³", "585.6 km³", "1000 km³"], ans: 2 },
+                    { q: "Which location in Meghalaya receives maximum rainfall up to 11,000 mm?", options: ["Shillong", "Cherrapunjee", "Tura", "Jowai"], ans: 1 },
+                    { q: "Gold extraction from the river Subansiri dates back prior to which century?", options: ["16th century", "18th century", "19th century", "20th century"], ans: 1 },
+                    { q: "Which of the following is NOT a cause of soil degradation?", options: ["Soil erosion", "Afforestation", "Salinization", "Waterlogging"], ans: 1 },
+                    { q: "Minerals are naturally occurring:", options: ["Organic liquids", "Inorganic crystalline solids", "Gaseous hydrocarbons", "Synthetic polymers"], ans: 1 },
+                    { q: "Which of the following is an energy-generating mineral?", options: ["Bauxite", "Haematite", "Coal", "Gypsum"], ans: 2 },
+                    { q: "Rainwater harvesting is especially beneficial in NE India because:", options: ["There is no rain", "Rain is heavy in monsoon but dry in winter", "Groundwater is completely absent", "Rivers never flow"], ans: 1 },
+                    { q: "Loss of topsoil is termed as:", options: ["Soil erosion", "Waterlogging", "Salinization", "Desertification"], ans: 0 },
+                    { q: "Which of the following is a metallic mineral of the ferrous group?", options: ["Copper", "Iron-ore", "Lead", "Zinc"], ans: 1 },
+                    { q: "Conservation of natural resources means using them:", options: ["Wastefully", "Frugally and prudently without wastage", "Only for industrial export", "Without any restriction"], ans: 1 }
+                ]
+            }
+        };
+
+        let currentActiveChapter = 1;
+
+        // Render Chapter Content
+        function renderChapter(chapNum) {
+            currentActiveChapter = chapNum;
+            const data = evsData[chapNum];
+            const container = document.getElementById('chapter-content-container');
+
+            // Update Nav Button Styles
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`nav-btn-${i}`);
+                const mobBtn = document.getElementById(`mob-btn-${i}`);
+                if (i === chapNum) {
+                    btn.className = "px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 bg-brand-600 text-white shadow-md";
+                    mobBtn.className = "whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-600 text-white";
+                } else {
+                    btn.className = "px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 text-slate-300 hover:text-white";
+                    mobBtn.className = "whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300";
+                }
+            }
+
+            let html = `
+                <div class="space-y-8 animate-fadeIn">
+                    <!-- Chapter Header Card -->
+                    <div class="bg-gradient-to-r from-slate-800 to-slate-800/90 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-xl">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="bg-brand-500/20 text-brand-400 text-xs font-bold px-3 py-1 rounded-full border border-brand-500/30">Unit 1 • Chapter ${chapNum}</span>
+                            <span class="text-slate-400 text-xs"><i class="fa-solid fa-book-open mr-1"></i> AHSEC Complete Syllabus</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">${data.title}</h2>
+                        <p class="text-slate-300 text-sm max-w-3xl">${data.subtitle}</p>
+                    </div>
+
+                    <!-- Topics Grid / List -->
+                    <div class="space-y-6">
+                        <h3 class="text-lg font-bold text-white flex items-center">
+                            <i class="fa-solid fa-list-check text-brand-400 mr-2"></i> Topic-by-Topic Exam Revision (Explanation → Exam Answer → Analogy)
+                        </h3>
+            `;
+
+            data.topics.forEach((topic, idx) => {
+                html += `
+                    <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 shadow-lg hover:border-slate-600 transition duration-300">
+                        <h4 class="text-base sm:text-lg font-bold text-brand-400 mb-3 flex items-center">
+                            <span class="w-7 h-7 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-xs font-bold mr-2.5">${idx + 1}</span>
+                            ${topic.title}
+                        </h4>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                            <!-- Explanation -->
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center">
+                                        <i class="fa-solid fa-lightbulb mr-1.5"></i> Concept Explanation
+                                    </h5>
+                                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${topic.explanation}</p>
+                                </div>
+                            </div>
+
+                            <!-- Exam-Ready Answer -->
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-brand-500/30 bg-gradient-to-b from-brand-950/10 to-slate-900/60 flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 flex items-center">
+                                        <i class="fa-solid fa-graduation-cap mr-1.5"></i> Exam-Ready Answer
+                                    </h5>
+                                    <p class="text-slate-200 text-xs sm:text-sm font-medium leading-relaxed">${topic.examAnswer}</p>
+                                </div>
+                                <div class="mt-3 pt-2 border-t border-slate-800 text-[10px] text-brand-400 font-semibold flex items-center">
+                                    <i class="fa-solid fa-check-circle mr-1"></i> AHSEC Marking Scheme Aligned
+                                </div>
+                            </div>
+
+                            <!-- Real Life Analogy -->
+                            <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+                                <div>
+                                    <h5 class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2 flex items-center">
+                                        <i class="fa-solid fa-puzzle-piece mr-1.5"></i> Real-Life Analogy
+                                    </h5>
+                                    <p class="text-slate-300 text-xs sm:text-sm italic leading-relaxed">"${topic.analogy}"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+
+                    <!-- 20 MCQs Section -->
+                    <div id="mcq-section" class="bg-slate-800 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-xl mt-12">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-700">
+                            <div>
+                                <h3 class="text-xl font-extrabold text-white flex items-center">
+                                    <i class="fa-solid fa-circle-question text-brand-400 mr-2.5"></i> Chapter ${chapNum}: 20 High-Yield Practice MCQs
+                                </h3>
+                                <p class="text-slate-400 text-xs mt-1">Test your exam readiness instantly. Click options to check correctness.</p>
+                            </div>
+                            <button onclick="checkAllMCQs(${chapNum})" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-md">
+                                <i class="fa-solid fa-check-double mr-1.5"></i> Reveal All Answers
+                            </button>
+                        </div>
+
+                        <div class="space-y-6" id="mcq-list-${chapNum}">
+            `;
+
+            data.mcqs.forEach((mcq, mIdx) => {
+                html += `
+                    <div class="bg-slate-900/80 border border-slate-700/70 rounded-2xl p-5 shadow-md">
+                        <p class="text-sm sm:text-base font-semibold text-white mb-3">
+                            <span class="text-brand-400 font-bold mr-2">Q${mIdx + 1}.</span> ${mcq.q}
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="q-${chapNum}-${mIdx}">
+                `;
+
+                mcq.options.forEach((opt, oIdx) => {
+                    html += `
+                        <button onclick="selectMCQOption(${chapNum}, ${mIdx}, ${oIdx}, ${mcq.ans})" 
+                            class="mcq-opt-${chapNum}-${mIdx} text-left px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 hover:border-slate-600 transition flex items-center justify-between">
+                            <span><strong class="mr-2 text-slate-400">${String.fromCharCode(65 + oIdx)}.</strong> ${opt}</span>
+                        </button>
+                    `;
+                });
+
+                html += `
+                        </div>
+                        <div id="feedback-${chapNum}-${mIdx}" class="mt-2 text-xs font-semibold hidden"></div>
+                    </div>
+                `;
+            });
+
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchTab(chapNum) {
+            renderChapter(chapNum);
+        }
+
+        function scrollToMCQs() {
+            const el = document.getElementById('mcq-section');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function selectMCQOption(chapNum, qIdx, selectedOpt, correctOpt) {
+            const options = document.querySelectorAll(`.mcq-opt-${chapNum}-${qIdx}`);
+            const feedback = document.getElementById(`feedback-${chapNum}-${qIdx}`);
+
+            options.forEach((btn, idx) => {
+                btn.className = `mcq-opt-${chapNum}-${qIdx} text-left px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-800 border border-slate-700 text-slate-300 flex items-center justify-between`;
+                if (idx === correctOpt) {
+                    btn.classList.remove('bg-slate-800', 'border-slate-700', 'text-slate-300');
+                    btn.classList.add('bg-emerald-950/60', 'border-emerald-500', 'text-emerald-300');
+                } else if (idx === selectedOpt && selectedOpt !== correctOpt) {
+                    btn.classList.remove('bg-slate-800', 'border-slate-700', 'text-slate-300');
+                    btn.classList.add('bg-rose-950/60', 'border-rose-500', 'text-rose-300');
+                }
+            });
+
+            feedback.classList.remove('hidden');
+            if (selectedOpt === correctOpt) {
+                feedback.className = "mt-2 text-xs font-semibold text-emerald-400";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Correct! Well done.`;
+            } else {
+                feedback.className = "mt-2 text-xs font-semibold text-rose-400";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1"></i> Incorrect. The correct answer is option ${String.fromCharCode(65 + correctOpt)}.`;
+            }
+        }
+
+        function checkAllMCQs(chapNum) {
+            const data = evsData[chapNum];
+            data.mcqs.forEach((mcq, mIdx) => {
+                selectMCQOption(chapNum, mIdx, mcq.ans, mcq.ans);
+            });
+        }
+
+        // Exam Timer Logic
+        let timerInterval = null;
+        let timeLeft = 45 * 60; // 45 minutes
+
+        function openExamTimerModal() {
+            document.getElementById('timerModal').classList.remove('hidden');
+        }
+
+        function closeExamTimerModal() {
+            document.getElementById('timerModal').classList.add('hidden');
+        }
+
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    let mins = Math.floor(timeLeft / 60);
+                    let secs = timeLeft % 60;
+                    document.getElementById('countdown-timer').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                } else {
+                    clearInterval(timerInterval);
+                    alert("Pomodoro study sprint completed! Take a 10-minute break.");
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timeLeft = 45 * 60;
+            document.getElementById('countdown-timer').innerText = "45:00";
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            renderChapter(1);
+        };
+    </script>
+</body>
+</html>
+
+```
